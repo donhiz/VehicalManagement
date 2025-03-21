@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "lldb",
+      "request": "launch",
+      "args": [],
+      "cwd": "/Volumes/nhido-smb/Semester 5/COSC292/Assignment2",
+      "program": "/Volumes/nhido-smb/Semester 5/COSC292/Assignment2/build/Debug/outDebug"
+    }
+  ]
+}
