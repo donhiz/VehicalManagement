@@ -3,8 +3,8 @@
 #define VEHICAL_MANAGEMENT
 
 
-#define MAX_YEAR 0x7FF 
-#define MAX_VALUE 0x1FFFFF000
+#define MAX_YEAR 0x7FF  //in binary, it is 0x011111111111 (I wnat the year is placed into 11 bits of datastorage variable)
+
 
 
 
