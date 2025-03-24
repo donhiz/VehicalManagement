@@ -9,7 +9,6 @@
 void testGarage()
 
 {
-
        //Number of vehicles to add to the garage
 
        int numVehicles;
