@@ -26,23 +26,35 @@ Returns: a dynamically allocated block of memory containing the vehicle's inform
 char* createVehicle() {
     unsigned int value, year;
     char description[100];
-    printf("Enter vehicle value (max 2097151): ");
+
+    printf("Enter vehicle value (max 2,097,151): ");
     scanf("%u", &value); // read vehicle's value from user input
+    
+    // Validate value is within limits (21 bits max = 2,097,151)
+    if (value > 2097151) {
+        printf("Error: Value exceeds maximum allowed ($2,097,151). Setting to maximum.\n");
+        value = 2097151;
+    }
     
     printf("Enter model year (max 2047): ");
     scanf("%u", &year); // read vehicle's year from user input
+
+     // Validate year is within limits (11 bits max = 2047)
+     if (year > 2047) {
+        printf("Error: Year exceeds maximum allowed (2047). Setting to maximum.\n");
+        year = 2047;
+    }
     
     getchar();  // Clear newline character
     
     printf("Enter vehicle description: ");
     fgets(description, sizeof(description), stdin);
     
-    // remove newline character
-    for (int i = 0; i < 100; i++) {
-        if (description[i] == '\n') {
-            description[i] = '\0'; // replace newline with null terminator
-            break;
-        }
+    // Remove newline character if present
+    size_t len = strlen(description);
+    if (len > 0 && description[len - 1] == '\n') {
+        description[len - 1] = '\0';
+        len--;
     }
     size_t desSize = strlen(description) + 1; // calculate size of description, including the null terminator
     char* vehicle = (char*)malloc(4 + desSize); //allocate memory to store value and year, and description 
@@ -109,7 +121,6 @@ char** createGarage(int numOfVehicles){
     for ( int i = 0; i < numOfVehicles; i++) {
         garage[i] = createVehicle();
 
-
     }
     return garage;
 
@@ -133,12 +144,18 @@ void displayGarage(char** garage, int numOfVehicles){
         return;
         
     }
-    for( int i =0 ; i< numOfVehicles; i ++){
-        printf("vehicle %d:\n" ,i + 1);
+    for (int i = 0; i < numOfVehicles; i++) {
+        printf("Vehicle %d:\n", i + 1);
+
+        if (garage[i] == NULL) {
+            printf(" Vehicle data is NULL!\n");
+            continue;
+        }
+
+        // Call displayVehicle for each vehicle
         displayVehicle(garage[i]);
-
+        printf("\n");
     }
-
 }
 
 /*
